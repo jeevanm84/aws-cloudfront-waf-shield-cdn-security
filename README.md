@@ -39,13 +39,45 @@ Full write-up, request-flow sequence, and design rationale: [`docs/ARCHITECTURE.
 
 ## Learning path
 
-| Level | Focus | Start here |
-|---|---|---|
-| Fundamentals | What CDN, edge caching, TTL, and DDoS/WAF mean, and why they're separate concerns | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
-| Hands-on | Stand up a CloudFront distribution in front of S3, observe cache hit vs. miss, invalidate a path | [`labs/01-cloudfront-cache-hit-miss.md`](labs/01-cloudfront-cache-hit-miss.md) |
-| Hands-on | Attach WAF, write a rate-based rule, and safely trigger a block | [`labs/02-waf-block-sqli-xss.md`](labs/02-waf-block-sqli-xss.md) |
-| Hands-on | Reason through Shield Standard vs. Advanced without incurring an actual DDoS test | [`labs/03-shield-ddos-simulation-safe.md`](labs/03-shield-ddos-simulation-safe.md) |
-| Interview prep | Progressive question set, fundamentals through architect-level scenarios | [`docs/INTERVIEW_QUESTIONS.md`](docs/INTERVIEW_QUESTIONS.md) |
+Three tiers, in order. Don't skip a tier — each one assumes you can already do everything in the tier before it. Every tier states what you need going in and what you'll be able to do coming out.
+
+### Beginner — no AWS account, no cost
+
+**You need:** comfortable with a terminal; no prior CDN, WAF, or DDoS knowledge required.
+**You'll come out able to:** explain cache hit vs. miss, TTL, and why Shield and WAF are separate layers — and recognize the pieces in a real Terraform skeleton without applying it.
+
+| Step | Do this |
+|---|---|
+| 1 | Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — request flow, design decisions, trade-offs |
+| 2 | Study [`diagrams/cloudfront-waf-shield-architecture.svg`](diagrams/cloudfront-waf-shield-architecture.svg) until you can redraw the request flow from memory |
+| 3 | Read (don't apply) [`examples/terraform/main.tf`](examples/terraform/main.tf) — a minimal, commented CloudFront + S3 + OAC + WAF skeleton |
+| 4 | Answer the Fundamentals section of [`docs/INTERVIEW_QUESTIONS.md`](docs/INTERVIEW_QUESTIONS.md) from memory |
+
+### Intermediate — requires an AWS account, small real cost
+
+**You need:** an AWS account, AWS CLI configured locally, and — before you touch anything else — a billing alarm and an IAM user with least-privilege permissions (never use the root account for these labs). Approximate per-lab cost is in [`docs/COST_AND_CLEANUP.md`](docs/COST_AND_CLEANUP.md); its master checklist has a billing-alarm reminder, but set one up now, before you provision anything, not after.
+**You'll come out able to:** stand up and lock down a CloudFront distribution, and tell WAF and Shield apart by what each one actually catches.
+
+| Step | Do this |
+|---|---|
+| 1 | [`labs/01-cloudfront-cache-hit-miss.md`](labs/01-cloudfront-cache-hit-miss.md) — CloudFront in front of S3, cache hit vs. miss, invalidation |
+| 2 | [`labs/02-waf-block-sqli-xss.md`](labs/02-waf-block-sqli-xss.md) — attach a Web ACL, write a rate-based rule, safely trigger a block |
+| 3 | Answer the Intermediate section of [`docs/INTERVIEW_QUESTIONS.md`](docs/INTERVIEW_QUESTIONS.md) |
+| 4 | Run the cleanup command for each lab immediately after finishing it — don't wait until the end |
+
+### Advanced — production reasoning, no new spend
+
+**You need:** the Intermediate tier done and cleaned up.
+**You'll come out able to:** reason like an on-call engineer about a live WAF false-positive or DDoS event, and justify Shield Standard vs. Advanced with evidence instead of a guess.
+
+| Step | Do this |
+|---|---|
+| 1 | [`labs/03-shield-ddos-simulation-safe.md`](labs/03-shield-ddos-simulation-safe.md) — Shield Standard vs. Advanced, no live attack traffic |
+| 2 | Check every item in [`docs/SECURITY.md`](docs/SECURITY.md) against what you built in the Intermediate tier |
+| 3 | Work [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) — incident-style scenarios: stale cache after deploy, WAF false positives, origin still publicly reachable |
+| 4 | Answer the Advanced through Architect/SRE sections of [`docs/INTERVIEW_QUESTIONS.md`](docs/INTERVIEW_QUESTIONS.md) without re-reading the architecture doc first |
+
+**Full walkthrough of all three tiers as one continuous path:** [`docs/END_TO_END_GUIDE.md`](docs/END_TO_END_GUIDE.md).
 
 ## Quick local verification
 

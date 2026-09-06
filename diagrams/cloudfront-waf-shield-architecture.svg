@@ -1,0 +1,162 @@
+<svg width="1600" height="1040" viewBox="0 0 1600 1040" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#2E7D32"/></marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#1565C0"/></marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#C62828"/></marker>
+    <marker id="arrowNavy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#546174"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1040" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="800" y="42" text-anchor="middle" font-size="28" font-weight="700" fill="#232F3E">Amazon CloudFront, AWS WAF &amp; AWS Shield</text>
+  <text x="800" y="68" text-anchor="middle" font-size="16" fill="#546174">Global content delivery and security architecture</text>
+
+  <!-- ===================== SECURITY RINGS ===================== -->
+  <circle cx="580" cy="470" r="230" fill="none" stroke="#C62828" stroke-width="2" stroke-dasharray="6 6" opacity="0.55"/>
+  <circle cx="580" cy="470" r="170" fill="none" stroke="#FF9900" stroke-width="2" stroke-dasharray="6 6" opacity="0.7"/>
+
+  <!-- Shield / WAF callouts -->
+  <line x1="240" y1="430" x2="350" y2="470" stroke="#C62828" stroke-width="1" opacity="0.6"/>
+  <rect x="45" y="400" width="200" height="46" rx="6" fill="#FDEDEC" stroke="#C62828" stroke-width="1"/>
+  <text x="55" y="418" font-size="13" font-weight="700" fill="#C62828">AWS Shield (outer layer)</text>
+  <text x="55" y="435" font-size="11.5" fill="#7a2b2b">Standard: auto DDoS L3/L4 protection</text>
+
+  <line x1="245" y1="510" x2="410" y2="470" stroke="#FF9900" stroke-width="1" opacity="0.7"/>
+  <rect x="45" y="490" width="200" height="60" rx="6" fill="#FFF6E6" stroke="#FF9900" stroke-width="1"/>
+  <text x="55" y="508" font-size="13" font-weight="700" fill="#8a5a00">AWS WAF (Layer 7 firewall)</text>
+  <text x="55" y="524" font-size="11.5" fill="#8a5a00">Blocks SQLi, XSS, bad bots,</text>
+  <text x="55" y="539" font-size="11.5" fill="#8a5a00">bad IPs, geo &amp; rate rules</text>
+
+  <!-- ===================== ORIGIN ===================== -->
+  <rect x="450" y="390" width="260" height="160" rx="10" fill="#EAF3FB" stroke="#147EBA" stroke-width="1.5"/>
+  <text x="580" y="414" text-anchor="middle" font-size="15" font-weight="700" fill="#0B4C75">Application Origin</text>
+  <text x="580" y="431" text-anchor="middle" font-size="12.5" fill="#0B4C75">Mumbai AWS Region</text>
+  <text x="470" y="452" font-size="12" fill="#123A55">• Amazon Route 53</text>
+  <text x="470" y="469" font-size="12" fill="#123A55">• Application Load Balancer</text>
+  <text x="470" y="486" font-size="12" fill="#123A55">• Amazon EC2 / ECS app</text>
+  <text x="470" y="503" font-size="12" fill="#123A55">• Amazon S3 static content</text>
+  <text x="470" y="520" font-size="12" fill="#123A55">• (Optional) API Gateway</text>
+  <text x="470" y="539" font-size="10.5" fill="#C62828">S3 blocked from direct access — OAC only</text>
+
+  <!-- ===================== REGIONS + EDGE LOCATIONS ===================== -->
+  <!-- Ireland -->
+  <circle cx="150" cy="150" r="55" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.5"/>
+  <text x="150" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Ireland</text>
+  <rect x="245" y="255" width="120" height="50" rx="6" fill="#E9F7EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="305" y="275" text-anchor="middle" font-size="12" font-weight="700" fill="#0F6E56">Edge Location</text>
+  <text x="305" y="291" text-anchor="middle" font-size="10.5" fill="#0F6E56">Cache (TTL-based)</text>
+  <line x1="192" y1="192" x2="255" y2="255" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <line x1="255" y1="255" x2="192" y2="192" stroke="#2E7D32" stroke-width="2.5" opacity="0" />
+  <line x1="360" y1="295" x2="470" y2="400" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+
+  <!-- Tokyo -->
+  <circle cx="1010" cy="150" r="55" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.5"/>
+  <text x="1010" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Tokyo</text>
+  <rect x="795" y="255" width="120" height="50" rx="6" fill="#E9F7EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="855" y="275" text-anchor="middle" font-size="12" font-weight="700" fill="#0F6E56">Edge Location</text>
+  <text x="855" y="291" text-anchor="middle" font-size="10.5" fill="#0F6E56">Cache (TTL-based)</text>
+  <line x1="968" y1="192" x2="905" y2="255" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <line x1="795" y1="295" x2="690" y2="400" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+  <!-- Tokyo bypass illustrating "without CloudFront" -->
+  <path d="M965,190 C 780,260 700,320 620,392" fill="none" stroke="#C62828" stroke-width="1.5" stroke-dasharray="3 5" marker-end="url(#arrowRed)" opacity="0.85"/>
+  <text x="760" y="210" font-size="11" fill="#C62828">without CloudFront — higher latency</text>
+
+  <!-- Canada -->
+  <circle cx="140" cy="780" r="55" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.5"/>
+  <text x="140" y="785" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Canada</text>
+  <rect x="240" y="640" width="120" height="50" rx="6" fill="#E9F7EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="300" y="660" text-anchor="middle" font-size="12" font-weight="700" fill="#0F6E56">Edge Location</text>
+  <text x="300" y="676" text-anchor="middle" font-size="10.5" fill="#0F6E56">Cache (TTL-based)</text>
+  <line x1="180" y1="745" x2="250" y2="685" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <line x1="360" y1="655" x2="465" y2="545" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+
+  <!-- Sydney -->
+  <circle cx="1030" cy="780" r="55" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.5"/>
+  <text x="1030" y="785" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">Sydney</text>
+  <rect x="770" y="640" width="120" height="50" rx="6" fill="#E9F7EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="830" y="660" text-anchor="middle" font-size="12" font-weight="700" fill="#0F6E56">Edge Location</text>
+  <text x="830" y="676" text-anchor="middle" font-size="10.5" fill="#0F6E56">Cache (TTL-based)</text>
+  <line x1="990" y1="745" x2="920" y2="685" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <line x1="770" y1="655" x2="695" y2="545" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+
+  <!-- US -->
+  <circle cx="580" cy="885" r="55" fill="#FFFFFF" stroke="#232F3E" stroke-width="1.5"/>
+  <text x="580" y="890" text-anchor="middle" font-size="14" font-weight="700" fill="#232F3E">US</text>
+  <rect x="520" y="705" width="120" height="50" rx="6" fill="#E9F7EF" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="580" y="725" text-anchor="middle" font-size="12" font-weight="700" fill="#0F6E56">Edge Location</text>
+  <text x="580" y="741" text-anchor="middle" font-size="10.5" fill="#0F6E56">Cache (TTL-based)</text>
+  <line x1="580" y1="830" x2="580" y2="757" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <line x1="580" y1="705" x2="580" y2="552" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+
+  <!-- ===================== LEGEND ===================== -->
+  <rect x="40" y="800" width="380" height="98" rx="8" fill="#F7F7F5" stroke="#B4B2A9" stroke-width="1"/>
+  <text x="55" y="822" font-size="13" font-weight="700" fill="#232F3E">Legend</text>
+  <line x1="55" y1="838" x2="90" y2="838" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <text x="98" y="842" font-size="11.5" fill="#333">Cache hit — served from edge, low latency</text>
+  <line x1="55" y1="856" x2="90" y2="856" stroke="#1565C0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/>
+  <text x="98" y="860" font-size="11.5" fill="#333">Cache miss — origin fetched, then cached</text>
+  <line x1="55" y1="874" x2="90" y2="874" stroke="#C62828" stroke-width="1.5" stroke-dasharray="3 5" marker-end="url(#arrowRed)"/>
+  <text x="98" y="878" font-size="11.5" fill="#333">Without CloudFront — direct, higher latency</text>
+  <text x="55" y="892" font-size="11.5" fill="#333">Dashed rings: AWS Shield (red) and AWS WAF (amber) perimeters</text>
+
+  <!-- ===================== INFO PANEL ===================== -->
+  <rect x="1160" y="95" width="400" height="710" rx="10" fill="#FAFAF8" stroke="#D3D1C7" stroke-width="1"/>
+
+  <text x="1180" y="128" font-size="16" font-weight="700" fill="#FF9900">Amazon CloudFront</text>
+  <text x="1180" y="150" font-size="12.5" fill="#333">• AWS global content delivery network</text>
+  <text x="1180" y="168" font-size="12.5" fill="#333">• Delivers static and dynamic content</text>
+  <text x="1180" y="186" font-size="12.5" fill="#333">• Reduces latency via edge locations</text>
+  <text x="1180" y="204" font-size="12.5" fill="#333">• Supports HTTPS, compression, origin failover</text>
+
+  <line x1="1180" y1="222" x2="1540" y2="222" stroke="#E2E0D6"/>
+
+  <text x="1180" y="246" font-size="16" font-weight="700" fill="#FF9900">TTL — time to live</text>
+  <text x="1180" y="268" font-size="12.5" fill="#333">• Controls how long content stays cached</text>
+  <text x="1180" y="286" font-size="12.5" fill="#333">• Min, default and max TTL are configurable</text>
+  <text x="1180" y="304" font-size="12.5" fill="#333">• Hot content served directly from the edge</text>
+
+  <line x1="1180" y1="322" x2="1540" y2="322" stroke="#E2E0D6"/>
+
+  <text x="1180" y="346" font-size="16" font-weight="700" fill="#FF9900">Cache invalidation</text>
+  <text x="1180" y="368" font-size="12.5" fill="#333">• Removes or refreshes cached objects</text>
+  <text x="1180" y="386" font-size="12.5" fill="#333">• Example: invalidate "/images/*" after a deploy</text>
+
+  <line x1="1180" y1="404" x2="1540" y2="404" stroke="#E2E0D6"/>
+
+  <text x="1180" y="428" font-size="16" font-weight="700" fill="#FF9900">AWS WAF</text>
+  <text x="1180" y="450" font-size="12.5" fill="#333">• Layer 7 web application firewall</text>
+  <text x="1180" y="468" font-size="12.5" fill="#333">• Allows, blocks, counts or challenges requests</text>
+  <text x="1180" y="486" font-size="12.5" fill="#333">• Protects CloudFront, ALB, API Gateway</text>
+  <text x="1180" y="504" font-size="12.5" fill="#333">• Rules: AWS managed, IP, rate-based, geo,</text>
+  <text x="1180" y="520" font-size="12.5" fill="#333">  bot control, custom header/URI/query-string</text>
+
+  <line x1="1180" y1="538" x2="1540" y2="538" stroke="#E2E0D6"/>
+
+  <text x="1180" y="562" font-size="16" font-weight="700" fill="#FF9900">AWS Shield</text>
+  <text x="1180" y="584" font-size="12.5" fill="#333">• Managed DDoS protection</text>
+  <text x="1180" y="602" font-size="12.5" fill="#333">• Standard: auto-enabled, free, covers L3/L4</text>
+  <text x="1180" y="620" font-size="12.5" fill="#333">  attacks for CloudFront and Route 53</text>
+  <text x="1180" y="638" font-size="12.5" fill="#333">• Advanced: enhanced detection, 24x7 DDoS</text>
+  <text x="1180" y="656" font-size="12.5" fill="#333">  response team, cost protection</text>
+
+  <line x1="1180" y1="674" x2="1540" y2="674" stroke="#E2E0D6"/>
+
+  <text x="1180" y="698" font-size="16" font-weight="700" fill="#FF9900">Origin protection</text>
+  <text x="1180" y="720" font-size="12.5" fill="#333">• S3: Origin Access Control (OAC) only</text>
+  <text x="1180" y="738" font-size="12.5" fill="#333">• ALB: HTTPS only, ACM TLS certificate</text>
+  <text x="1180" y="756" font-size="12.5" fill="#333">• ALB: custom header validation</text>
+  <text x="1180" y="774" font-size="12.5" fill="#333">• ALB: security-group restrictions</text>
+
+  <!-- ===================== BOTTOM COMPARISON ===================== -->
+  <rect x="40" y="925" width="1520" height="100" rx="8" fill="#FAFAF8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="60" y="950" font-size="14" font-weight="700" fill="#C62828">Without CloudFront</text>
+  <text x="60" y="970" font-size="12.5" fill="#333">User → Internet → Route 53 → ALB → EC2/ECS application</text>
+  <text x="60" y="990" font-size="12.5" fill="#7a2b2b">Result: higher latency and more load on the origin</text>
+
+  <line x1="800" y1="935" x2="800" y2="1015" stroke="#D3D1C7"/>
+
+  <text x="825" y="950" font-size="14" font-weight="700" fill="#0F6E56">With CloudFront</text>
+  <text x="825" y="970" font-size="12.5" fill="#333">User → Route 53 → Shield → WAF → nearest edge → ALB/S3 origin</text>
+  <text x="825" y="990" font-size="12.5" fill="#0F6E56">Result: lower latency, cached content, reduced origin load, improved security</text>
+</svg>
